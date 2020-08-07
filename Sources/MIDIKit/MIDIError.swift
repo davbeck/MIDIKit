@@ -12,7 +12,7 @@ import CoreMIDI
 public struct MIDIError: Swift.Error {
 	public var status: OSStatus
 	
-	public internal init(status: OSStatus) {
+	internal init(status: OSStatus) {
 		self.status = status
 	}
 }

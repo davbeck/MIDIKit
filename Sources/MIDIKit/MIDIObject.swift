@@ -9,7 +9,7 @@
 import Foundation
 import CoreMIDI
 
-public extension MIDIObjectType: CustomStringConvertible {
+extension MIDIObjectType: CustomStringConvertible {
 	public var description: String {
 		switch self {
 		case .other:
