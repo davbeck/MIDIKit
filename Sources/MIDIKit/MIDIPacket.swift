@@ -104,6 +104,15 @@ public enum MIDIStatus: UInt8, CaseIterable {
 			return "Pitch Bend Change"
 		}
 	}
+	
+	public var usesNote: Bool {
+		switch self {
+		case .noteOn, .noteOff, .polyphonicKeyPressure:
+			return true
+		default:
+			return false
+		}
+	}
 }
 
 extension MIDIPacket {
