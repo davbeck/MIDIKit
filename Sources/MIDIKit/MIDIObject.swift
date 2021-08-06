@@ -76,17 +76,21 @@ public class MIDIObject: CustomStringConvertible, Identifiable, Hashable {
 		}
 		return result
 	}
+    
+    public func name() throws -> String? {
+        try string(forPropertyID: kMIDIPropertyName)
+    }
+    
+    public var isOffline: Bool {
+        (try? integer(forPropertyID: kMIDIPropertyOffline)) != 0
+    }
 	
-	public func name() throws -> String? {
-		try string(forPropertyID: kMIDIPropertyName)
+    public var uniqueID: MIDIUniqueID {
+		return (try? integer(forPropertyID: kMIDIPropertyUniqueID)) ?? MIDIUniqueID(rawValue)
 	}
 	
-	public func uniqueID() throws -> MIDIUniqueID {
-		return try integer(forPropertyID: kMIDIPropertyUniqueID)
-	}
-	
-	public var id: MIDIUniqueID? {
-		return try? uniqueID()
+	public var id: MIDIUniqueID {
+		return uniqueID
 	}
 	
 	public var description: String {
