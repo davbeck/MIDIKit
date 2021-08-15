@@ -1,18 +1,16 @@
-//
-//  MIDIError.swift
-//  MIDIDebug
-//
-//  Created by David Beck on 8/3/20.
-//  Copyright © 2020 David Beck. All rights reserved.
-//
-
 import Foundation
 import CoreMIDI
 
 public struct MIDIError: Swift.Error {
-	public var status: OSStatus
+    public var status: OSStatus
 	
-	internal init(status: OSStatus) {
-		self.status = status
-	}
+    internal init(status: OSStatus) {
+        self.status = status
+    }
+    
+    static func check(_ status: OSStatus) throws {
+        guard status == 0 else {
+            throw MIDIError(status: status)
+        }
+    }
 }

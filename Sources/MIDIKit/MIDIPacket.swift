@@ -132,6 +132,34 @@ extension MIDIPacket {
 	public var channel: UInt8 {
 		data.0 & 0x0F
 	}
+    
+    public var note: UInt8 {
+        data.1
+    }
+    
+    public var intensity: UInt8 {
+        data.2
+    }
+    
+    public var polyphonicKeyPressure: UInt8 {
+        data.2
+    }
+    
+    public var control: UInt8 {
+        data.1
+    }
+    
+    public var value: UInt8 {
+        data.2
+    }
+    
+    public var program: UInt8 {
+        data.1
+    }
+    
+    public var channelPressure: UInt8 {
+        data.1
+    }
 	
 	public init(timeStamp: MIDITimeStamp, bytes: [UInt8]) {
 		self.init()

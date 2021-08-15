@@ -63,4 +63,26 @@ public final class MIDIClient: MIDIObject, ObservableObject {
     deinit {
         MIDIClientDispose(rawValue)
     }
+    
+    public func createDestination(name: String) throws -> MIDIVirtualDestination {
+        var outDest = MIDIEndpointRef()
+        let publisher = PassthroughSubject<MIDIPacket, Never>()
+        
+        do {
+            try MIDIError.check(MIDIDestinationCreateWithBlock(
+                rawValue,
+                name as CFString,
+                &outDest
+            ) { packetList, context in
+                for packet in packetList.pointee {
+                    publisher.send(packet)
+                }
+            })
+        } catch {
+            MIDIEndpointDispose(outDest)
+            throw error
+        }
+        
+        return MIDIVirtualDestination(rawValue: outDest, packetRecieved: publisher)
+    }
 }
