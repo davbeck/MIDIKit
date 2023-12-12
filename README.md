@@ -1,3 +1,3 @@
 # MIDIKit
 
-A description of this package.
+A Swift wrapper around [CoreMIDI](https://developer.apple.com/documentation/coremidi/).
